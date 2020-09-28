@@ -12,7 +12,7 @@ finwiz_url = 'https://finviz.com/quote.ashx?t='
 
 ##2. Store the Date, Time and News Headlines Data
 news_tables = {}
-tickers = ['AMZN', 'TSLA', 'GOOG']
+tickers = ['AAPL']
 
 for ticker in tickers:
     url = finwiz_url + ticker
@@ -26,12 +26,12 @@ for ticker in tickers:
     news_tables[ticker] = news_table
 
 ##3. Print the Data Stored in news_tables (optional)
-# Read one single day of headlines for 'AMZN'
-amzn = news_tables['AMZN']
-# Get all the table rows tagged in HTML with <tr> into 'amzn_tr'
-amzn_tr = amzn.findAll('tr')
+# Read one single day of headlines for 'AAPL'
+aapl = news_tables['AAPL']
+# Get all the table rows tagged in HTML with <tr> into 'aapl_tr'
+aapl_tr = aapl.findAll('tr')
 
-for i, table_row in enumerate(amzn_tr):
+for i, table_row in enumerate(aapl_tr):
     # Read the text of the element 'a' into 'link_text'
     a_text = table_row.a.text
     # Read the text of the element 'td' into 'data_text'
@@ -40,7 +40,7 @@ for i, table_row in enumerate(amzn_tr):
     print(a_text)
     print(td_text)
     # Exit after printing 4 rows of data
-    if i == 3:
+    if i == 20:
         break
 
 ##4. Parse the Date, Time and News Headlines into a Python List
