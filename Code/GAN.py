@@ -17,8 +17,7 @@ def make_generator_model(input_dim, feature_size) -> tf.keras.models.Model:
     model.add(LSTM(units=64, return_sequences=True, input_shape=(input_dim, feature_size)))
     model.add(LSTM(16))
     model.add(Dense(units=7))
-    model.compile(optimizer='adam', loss='mean_squared_error')
-    #model.add(Reshape(7, 1))
+    #model.compile(optimizer='adam', loss='mean_squared_error')
     return model
 model1 = make_generator_model(30,31)
 print(model1.summary())
