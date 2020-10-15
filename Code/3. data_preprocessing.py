@@ -35,7 +35,7 @@ Dataset_I = pd.read_csv('Finaldata_with_Fourier.csv', parse_dates=['Date'])
 Dataset_II = pd.read_csv('VAE_fearues.csv')
 dataset = pd.concat([Dataset_I, Dataset_II], axis=1)
 
-#If NOT using VAE features
+# If NOT using VAE features
 # Run this
 #dataset = pd.read_csv('Finaldata_with_Fourier.csv', parse_dates=['Date'])
 
