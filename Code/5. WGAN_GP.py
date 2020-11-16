@@ -10,10 +10,6 @@ from tensorflow.keras.layers import GRU, LSTM, Bidirectional, Dense, Flatten, Co
 from tensorflow.keras import Sequential, regularizers
 from tensorflow.python.client import device_lib
 
-def get_available_gpus():
-    local_device_protos = device_lib.list_local_devices()
-    return [x.name for x in local_device_protos if x.device_type == 'GPU']
-
 X_train = np.load("X_train.npy", allow_pickle=True)
 y_train = np.load("y_train.npy", allow_pickle=True)
 X_test = np.load("X_test.npy", allow_pickle=True)
