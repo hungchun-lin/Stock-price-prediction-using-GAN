@@ -8,6 +8,9 @@ Team member: Chen Chen, Hungchun Lin
 ### Meeting Note
 The weekly meeting notes are also the progress of our project went through by week.
 
+### Relevant Artical
+This file includes the articles/GitHub we have referenced to complete this project.
+
 ### Final Group Project Report
 The final report for our project in pdf.
 
