@@ -18,7 +18,7 @@ The final report for our project in pdf.
 The group presentation slides in pdf.  
 
 ### Code
-The code used for data download, preprocessing, and modeling.   
+The code used for data preprocessing and modeling.   
 Please check code folder for detailed instruction.   
 There are also pretained models that can generate stock price.   
 
