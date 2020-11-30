@@ -2,32 +2,29 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
-
-
 from numpy import *
 from math import sqrt
 from pandas import *
 from datetime import datetime, timedelta
-
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import mean_squared_error
-
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Bidirectional
 from tensorflow.keras.layers import BatchNormalization, Embedding, TimeDistributed, LeakyReLU
 from tensorflow.keras.layers import GRU, LSTM
 from tensorflow.keras.optimizers import Adam
-
 from matplotlib import pyplot
 from pickle import load
 
+# Load data
 X_train = np.load("X_train.npy", allow_pickle=True)
 y_train = np.load("y_train.npy", allow_pickle=True)
 X_test = np.load("X_test.npy", allow_pickle=True)
 y_test = np.load("y_test.npy", allow_pickle=True)
 yc_train = np.load("yc_train.npy", allow_pickle=True)
 yc_test = np.load("yc_test.npy", allow_pickle=True)
+
 # Parameters
 LR = 0.0001
 BATCH_SIZE = 128
