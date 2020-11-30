@@ -2,6 +2,8 @@
 # Code Instruction
 The code are used to scrapped news from seekingAlpha website, and sentiment the new by giving a score bewteen -1 to 1. 
 
-## web_scraping
+## Web_scraping
+To run the webscriping code you need to download a webdriver first. 
+The code are used to scrapping all the news for Apple company on SeekingAlpha with news date and new title.
 
 ## Finbert
