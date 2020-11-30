@@ -20,6 +20,9 @@ After we run this file, we will get X_train.npy, y_train.npy, X_test.npy, y_test
 ## Basic LSTM
 **"3. Basic_LSTM.py"** is the baseline model for our project, which we use LSTM to d the prediction.
 
+## Basic GRU
+**"3. Basic_GRU.py"** is the traditional basic model for our project, which we use GRU to d the prediction.
+
 ## Basic GAN
 For Basic GAN, **"4. Basic_GAN.py"** is our basic GAN model.
 
