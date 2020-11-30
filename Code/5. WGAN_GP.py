@@ -6,18 +6,19 @@ import tensorflow as tf
 import numpy as np
 from pickle import load
 from tensorflow.keras.losses import mean_squared_error
-from tensorflow.keras.layers import GRU, LSTM, Bidirectional, Dense, Flatten, Conv1D, BatchNormalization, LeakyReLU, ELU, ReLU
+from tensorflow.keras.layers import GRU, Dense, Flatten, Conv1D, BatchNormalization, LeakyReLU, ELU, ReLU
 from tensorflow.keras import Sequential, regularizers
 from tensorflow.python.client import device_lib
 
+# Load data
 X_train = np.load("X_train.npy", allow_pickle=True)
 y_train = np.load("y_train.npy", allow_pickle=True)
 X_test = np.load("X_test.npy", allow_pickle=True)
 y_test = np.load("y_test.npy", allow_pickle=True)
 yc_train = np.load("yc_train.npy", allow_pickle=True)
 yc_test = np.load("yc_test.npy", allow_pickle=True)
-#initializer = tf.keras.initializers.glorot_uniform(gain=0.5, seed=None)
 
+# Define the generator
 def Generator(input_dim, output_dim, feature_size) -> tf.keras.models.Model:
     model = Sequential()
     model.add(GRU(units=256,
@@ -38,27 +39,21 @@ def Generator(input_dim, output_dim, feature_size) -> tf.keras.models.Model:
     model.add(Dense(units=output_dim))
     return model
 
-model = Generator(4, 3, 36)
-print(model.summary())
-
+# Define the discriminator
 def Discriminator() -> tf.keras.models.Model:
     model = tf.keras.Sequential()
     model.add(Conv1D(32, input_shape=(4, 1), kernel_size=3, strides=2, padding="same", activation=LeakyReLU(alpha=0.01)))
     model.add(Conv1D(64, kernel_size=3, strides=2, padding="same", activation=LeakyReLU(alpha=0.01)))
-    #model.add(BatchNormalization())
     model.add(Conv1D(128, kernel_size=3, strides=2, padding="same", activation=LeakyReLU(alpha=0.01)))
-    #model.add(BatchNormalization())
     model.add(Flatten())
     model.add(Dense(220, use_bias=True))
     model.add(LeakyReLU())
-    #model.add(BatchNormalization())
     model.add(Dense(220, use_bias=True))
     model.add(ReLU())
     model.add(Dense(1))
     return model
-model = Discriminator()
-print(model.summary())
 
+# Train WGAN-GP model
 class GAN():
     def __init__(self, generator, discriminator):
         super(GAN, self).__init__()
@@ -176,20 +171,20 @@ class GAN():
                 self.checkpoint.save(file_prefix=self.checkpoint_prefix)
                 print('epoch', epoch+1, 'd_loss', loss['d_loss'].numpy(), 'g_loss', loss['g_loss'].numpy())
 
-            # print('Time for epoch {} is {} sec'.format(epoch + 1, time.time() - start))
             # For printing loss
             epoch_end_time = time.time()
             per_epoch_ptime = epoch_end_time - start
             train_hist['D_losses'].append(D_losses)
             train_hist['G_losses'].append(G_losses)
             train_hist['per_epoch_times'].append(per_epoch_ptime)
+            
         # Reshape the predicted result & real
         Predicted_price = np.array(Predicted_price)
         Predicted_price = Predicted_price.reshape(Predicted_price.shape[1], Predicted_price.shape[2])
         Real_price = np.array(Real_price)
         Real_price = Real_price.reshape(Real_price.shape[1], Real_price.shape[2])
 
-
+        # Plot the loss
         plt.plot(train_hist['D_losses'], label='D_loss')
         plt.plot(train_hist['G_losses'], label='G_loss')
         plt.xlabel('Epoch')
@@ -223,8 +218,6 @@ X_scaler = load(open('X_scaler.pkl', 'rb'))
 y_scaler = load(open('y_scaler.pkl', 'rb'))
 train_predict_index = np.load("index_train.npy", allow_pickle=True)
 test_predict_index = np.load("index_test.npy", allow_pickle=True)
-#dataset_train = pd.read_csv('dataset_train.csv', index_col=0)
-
 
 print("----- predicted price -----", Predicted_price)
 
@@ -234,27 +227,19 @@ rescaled_Predicted_price = y_scaler.inverse_transform(Predicted_price)
 print("----- rescaled predicted price -----", rescaled_Predicted_price)
 print("----- SHAPE rescaled predicted price -----", rescaled_Predicted_price.shape)
 
-#output_dim = Real_price.shape[1]
-
-#predict_result = pd.DataFrame()
-#predict_result = pd.DataFrame(rescaled_Predicted_price, columns = ["predict_price"], index=train_predict_index)
-#real_price = pd.DataFrame()
-#real_price = pd.DataFrame(rescaled_Real_price.ravel(), columns = ["real_price"], index=train_predict_index)
 predict_result = pd.DataFrame()
-# #for i in range(60):
 for i in range(rescaled_Predicted_price.shape[0]):
     y_predict = pd.DataFrame(rescaled_Predicted_price[i], columns=["predicted_price"], index=train_predict_index[i:i+output_dim])
     predict_result = pd.concat([predict_result, y_predict], axis=1, sort=False)
-#
+
 real_price = pd.DataFrame()
-# #for i in range(60):
 for i in range(rescaled_Real_price.shape[0]):
     y_train = pd.DataFrame(rescaled_Real_price[i], columns=["real_price"], index=train_predict_index[i:i+output_dim])
     real_price = pd.concat([real_price, y_train], axis=1, sort=False)
 
 predict_result['predicted_mean'] = predict_result.mean(axis=1)
 real_price['real_mean'] = real_price.mean(axis=1)
-#
+
 # Plot the predicted result
 plt.figure(figsize=(16, 8))
 plt.plot(real_price["real_mean"])
