@@ -5,12 +5,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.dates import DateFormatter
 import math
-# with open('DATA.csv', 'r') as file:
-#     reader = csv.reader(file)
-#     names = next(reader)
-#     print(names)
-#     for row in reader:
-#         print(row)
 
 ## import data
 df = pd.read_csv('DATA.csv', parse_dates=['Date'])
@@ -112,15 +106,15 @@ def plot_technical_indicators(dataset, last_days):
        plt.ylabel('USD')
        plt.legend()
 
-       # # Plot second subplot
-       # plt.subplot(2, 1, 2)
-       # plt.title('MACD')
-       # plt.plot(dataset['MACD'], label='MACD', linestyle='-.')
-       # plt.hlines(15, xmacd_, shape_0, colors='g', linestyles='--')
-       # plt.hlines(-15, xmacd_, shape_0, colors='g', linestyles='--')
-       # plt.plot(dataset['logmomentum'], label='Momentum', color='b', linestyle='-')
-       #
-       # plt.legend()
+       # Plot second subplot
+       plt.subplot(2, 1, 2)
+       plt.title('MACD')
+       plt.plot(dataset['MACD'], label='MACD', linestyle='-.')
+       plt.hlines(15, xmacd_, shape_0, colors='g', linestyles='--')
+       plt.hlines(-15, xmacd_, shape_0, colors='g', linestyles='--')
+       plt.plot(dataset['logmomentum'], label='Momentum', color='b', linestyle='-')
+       
+       plt.legend()
        plt.show()
 
 plot_technical_indicators(T_df, 400)
