@@ -17,8 +17,8 @@ In this process, there are two parameters we can set here: **n_steps_in** and **
 After we run this file, we will get X_train.npy, y_train.npy, X_test.npy, y_test.npy, yc_train.npy, yc_test.npy, index_train.npy and index_test.npy, that w may need to use in the following process
 
 
-## Basic LSTM
-**"3. Basic_LSTM.py"** is the baseline model for our project, which we use LSTM to d the prediction.
+## Baseline LSTM
+**"3. Baseline_LSTM.py"** is the baseline model for our project, which we use LSTM to d the prediction.
 
 ## Basic GRU
 **"3. Basic_GRU.py"** is the traditional basic model for our project, which we use GRU to d the prediction.
