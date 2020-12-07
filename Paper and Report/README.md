@@ -4,4 +4,4 @@
 2. The Weekly report  
 3. The Final report  
 
-The paper the submitted to the Journal of Computer Science  
+   The paper has been submitted to the Journal of Computer Science  
