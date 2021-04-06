@@ -1,3 +1,7 @@
+# Publication:
+https://thescipub.com/abstract/jcssp.2021.188.196
+
+
 # Stock-price-prediction-using-GAN
 DATS6501 Capstone
 Team member: Chen Chen, HungChun Lin 
