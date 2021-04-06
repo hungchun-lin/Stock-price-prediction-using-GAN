@@ -1,6 +1,6 @@
 # Publication:
 Journal: Journal of Computer Science  
-Title: Stock price prediction using Generative Adversarial Networks
+Title: Stock price prediction using Generative Adversarial Networks  
 https://thescipub.com/abstract/jcssp.2021.188.196
 
 
